@@ -7,6 +7,7 @@ DOWN = 270
 LEFT = 180
 RIGHT = 0
 
+
 class Snake:
     def __init__(self):
         self.shape = 'square'
@@ -25,6 +26,17 @@ class Snake:
             coordinates = self.parts[part_num - 1].position()
             self.parts[part_num].setposition(coordinates)
         self.head.forward(MOVE_DISTANCE)
+
+    def add_part(self, pos):
+        new_part = Turtle(shape=self.shape)
+        new_part.penup()
+        new_part.color(self.color)
+        new_part.setposition(pos)
+        self.parts.append(new_part)
+
+    def extend(self):
+        # add new segment to the snake
+        self.add_part(self.parts[-1].position())
 
     def up(self):
         if self.head.heading() != DOWN:
